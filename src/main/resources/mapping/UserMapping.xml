@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.excelDemo.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.excelDemo.entity.User">
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="age" jdbcType="INTEGER" property="age"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+    </resultMap>
+
+    <select id="get" resultMap="BaseResultMap">
+        select * from user where id = #{id}
+    </select>
+
+    <insert id="insert">
+        insert into user
+        (name,age,sex)
+        values
+        (#{name},
+        #{age},
+        #{sex})
+    </insert>
+
+    <insert id="insertList">
+        insert into user
+        (name,age,sex)
+        values
+        <foreach collection="list" item="item" separator="," index="index">
+            (#{item.name},
+            #{item.age},
+            #{item.sex})
+        </foreach>
+    </insert>
+
+</mapper>
